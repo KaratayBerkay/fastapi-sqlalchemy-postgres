@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgres_example:
+    image: 'bitnami/postgresql:latest'
+    container_name: postgres_example
+    environment:
+      - POSTGRES_DB=example_database
+      - POSTGRES_USER=example_user
+      - POSTGRES_PASSWORD=example_password
+    networks:
+      - example_network
+    ports:
+      - "5434:5432"
+    volumes:
+      - example_data:/bitnami/postgresql
+
+  api_example:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api_example
+    networks:
+      - example_network
+    depends_on:
+      - postgres_example
+    environment:
+      - CELERY_BROKER_URL=redis://redis_example:6379
+      - DATABASE_URL=postgresql+psycopg2://example_user:example_password@postgres_example:5432/example_database
+    ports:
+      - "41555:41555"
+    volumes:
+      - example_volume:/var/lib/postgresql/backup
+
+volumes:
+  example_data:
+  example_volume:
+
+networks:
+  example_network:
+    internal: true
