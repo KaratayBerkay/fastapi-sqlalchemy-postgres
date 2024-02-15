@@ -1,7 +1,6 @@
 import os
 import uvicorn
 
-
 from configs import Config
 
 from fastapi import FastAPI
@@ -127,7 +126,7 @@ def update_alembic():
 
 
 if __name__ == "__main__":
-    # update_alembic()
+    update_alembic()
     uvicorn_config = {
         "app": "app:app",
         "host": "0.0.0.0",
