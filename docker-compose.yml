@@ -25,7 +25,6 @@ services:
     depends_on:
       - postgres_example
     environment:
-      - CELERY_BROKER_URL=redis://redis_example:6379
       - DATABASE_URL=postgresql+psycopg2://example_user:example_password@postgres_example:5432/example_database
     ports:
       - "41555:41555"

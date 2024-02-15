@@ -1,15 +1,10 @@
 from sqlalchemy import (
-    BigInteger,
-    SmallInteger,
     Index,
-    Boolean,
     String,
-    Integer,
     TIMESTAMP,
     Enum,
     text,
     ForeignKey,
-    Numeric,
 )
 from sqlalchemy.dialects.postgresql import UUID, BYTEA, JSONB
 from sqlalchemy.orm import relationship, mapped_column
